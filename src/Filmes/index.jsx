@@ -1,17 +1,26 @@
-import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, {useState} from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View, Modal } from "react-native";
+
+import Detalhes from "../Modal";
 
 export default function Filmes({ data }) {
+  const [visibleModal, setVisibleModal] = useState(false);
+
   return (
     <View>
       <View style={styles.card}>
         <Text style={styles.titulo}>{data.nome}</Text>
         <Image source={{ uri: data.foto }} style={styles.capa} />
 
-        <TouchableOpacity style={styles.botao} onPress={() => {}}>
+        <TouchableOpacity style={styles.botao} onPress={() => setVisibleModal(true)}>
           <Text style={styles.botaoTexto}>LEIA MAIS</Text>
         </TouchableOpacity>
       </View>
+
+      <Modal transparent={true} animationType="slide" visible={visibleModal}>
+        <Detalhes/>
+      </Modal>
+
     </View>
   );
 }
